@@ -1,0 +1,28 @@
+version: '3'
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile.front
+    volumes: 
+      - ./front:/app
+    command: yarn dev
+    ports:
+      - "3000:3000"
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    volumes: 
+      - ./fast:/server
+    tty: true
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+
+  db:
+   image: mysql
+   environment:
+     - MYSQL_ROOT_PASSWORD=password
