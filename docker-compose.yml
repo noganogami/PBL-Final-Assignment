@@ -15,8 +15,8 @@ services:
       context: .
       dockerfile: Dockerfile.server
     volumes: 
-      - ./fast:/server
-    tty: true
+      - ./back:/server
+    command: uvicorn main:app --reload --host 0.0.0.0
     depends_on:
       - db
     ports:
