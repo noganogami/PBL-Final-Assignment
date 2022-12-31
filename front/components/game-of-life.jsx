@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import {Center, HStack, VStack, GridItem, SimpleGrid, Box, Text, Button, ButtonGroup} from '@chakra-ui/react'
 import Cell from './hello_life';
-import { interval } from "./interval";
+import { interval } from './interval';
+import PostForm from './postItem';
 
 
 
@@ -74,7 +75,17 @@ export default function LifeGame() {
    use1Second(tick);
 
 
-
+   function toBinary(cells) {
+      let indices = '';
+      cells.map((cell) => cell.map(state => {
+         if (state) {
+            indices += '1';
+         } else {
+            indices += '0';
+         }
+      }))
+      return indices;
+   }
 
    return (
       <Box>
@@ -101,6 +112,8 @@ export default function LifeGame() {
                <Button onClick={reset}>reset</Button>
             </HStack>
          </Center>
+         <Button onClick={() =>console.log(toBinary(checkPoint))}>to</Button>
+         <PostForm indices={toBinary(checkPoint)} />
       </Box>
    );
 }

@@ -38,13 +38,6 @@ app.add_middleware(
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
-# to get a string like this run:
-# openssl rand -hex 32
-SECRET_KEY = "764e087ffcb3a7310dcb7f52cbad1490c0494551c00fd9a24c88c48231f87eb3"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
-
-
 def authenticate_user(db: Session, username: str, password: str):
     user = crud.get_user_by_username(db, username)
     if not user:
@@ -52,14 +45,6 @@ def authenticate_user(db: Session, username: str, password: str):
     if not crud.verify_password(password, user.hashed_password):
         return False
     return user
-
-
-def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)):
-    to_encode = data.copy()
-    expire = datetime.now() + expires_delta
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
 
 
 def get_db():
@@ -110,11 +95,11 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 
-@app.post("/users/{user_id}/items/", response_model=schemas.Item)
-def create_item_for_user(
-    user_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)
-):
-    return crud.create_user_item(db=db, item=item, user_id=user_id)
+@app.post("/items/", response_model=schemas.Item)
+def create_item_for_user(item: schemas.ItemCreate, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+    username = auth.decode_token(token)["sub"]
+    user = crud.get_user_by_username(db=db, username=username)
+    return crud.create_user_item(db=db, item=item, user_id=user.user_id)
 
 
 @app.get("/items/", response_model=List[schemas.Item])

@@ -1,5 +1,6 @@
 from typing import List, Union
 from pydantic import BaseModel
+from models import Tag
 
 
 class Token(BaseModel):
@@ -25,7 +26,8 @@ class Favo(FavoBase):
 
 class ItemBase(BaseModel):
     title: str
-    tag: Union[str, None] = None
+    tag: Union[Tag, None] = None
+    indices: str
 
 
 class ItemCreate(ItemBase):

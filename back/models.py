@@ -32,6 +32,7 @@ class Item(Base):
     item_id = Column(Integer, primary_key=True, index=True)
     title = Column(String(50), index=True)
     tag = Column(Enum(Tag), index=True)
+    indices = Column(String(1024))
     owner_id = Column(Integer, ForeignKey("users.user_id"))
     created_at = Column(DateTime, default=datetime.now(), index=True)
 
