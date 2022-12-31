@@ -1,8 +1,9 @@
-import {Text, Box} from '@chakra-ui/layout';
+import {Center, Text, Box} from '@chakra-ui/layout';
 import React, { useState } from 'react';
 import {SimpleGrid, Button, ButtonGroup} from '@chakra-ui/react'
 import Link from 'next/link'
 import LifeGame from '../components/game-of-life'
+import { Header } from '../components/header'
 
 async function requestUsers(skip = 0, limit = 100) {
    const url = 'http://localhost:8000/users/?skip=' + skip + '&limit=' + limit;
@@ -70,6 +71,7 @@ export default function Index() {
    const [array, setArray] = useState(init);
 
    return (<Box>
+      <Header />
       {
          !isLoggedIn && 
             <Link href = '/login'><Button colorScheme = 'blue'>
@@ -87,7 +89,8 @@ export default function Index() {
          RequestUsers
       </Button>
 
-      <LifeGame />
-
+      <Center>
+         <LifeGame />
+      </Center>
    </Box>);
 }

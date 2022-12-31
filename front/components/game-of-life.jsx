@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import {HStack, VStack, GridItem, SimpleGrid, Box, Text, Button, ButtonGroup} from '@chakra-ui/react'
+import React, { useCallback, useState } from 'react';
+import {Center, HStack, VStack, GridItem, SimpleGrid, Box, Text, Button, ButtonGroup} from '@chakra-ui/react'
 import Cell from './hello_life';
+import { interval } from "./interval";
+
+
 
 // init
 let init = new Array(32);
@@ -22,6 +25,7 @@ for (let y = 0; y < 32; y++) {
 }
 let cell = new Cell(init);
 
+
 export default function LifeGame() {
    const [cellState, setState] = useState(cell.current_state);
 
@@ -32,21 +36,71 @@ export default function LifeGame() {
       setState(cell.current_state)
    }
 
+
+   const [checkPoint, setCheckPoint] = useState(init);
+   function startLife() {
+      if (!running) {
+         setCheckPoint(cell.current_state);
+      }
+      setRunning(true);
+   }
+
+   function nextStep() {
+      cell.updateState();
+      setState(cell.current_state);
+   }
+
+   function initialize() {
+      cell.initialize(checkPoint);
+      setState(cell.current_state);
+   }
+
+
+   const use1Second = interval(1e3);
+
+   const [running, setRunning] = useState(false);
+   const tick = useCallback(
+      () => (running ? nextStep() : undefined),
+      [running]
+   );
+   const start = () => startLife();
+   const pause = () => setRunning(false);
+   const restart = () => setRunning(true);
+   const reset = () => {
+      pause();
+      initialize();
+   };
+
+   use1Second(tick);
+
+
+
+
    return (
       <Box>
          <Box>
             {
                cellState.map((states, iy) => <HStack spacing={0}> {states.map((state, ix) => {
                   if ( state ) {
-                     return <Box as='button' onClick={(e) => clickCell(e)} w={5} h={5} id={Array.from([ix,iy])} bg='black' borderWidth='1px'></Box>
+                     return <Box as='button' onClick={(e) => clickCell(e)} w={4} h={4} id={Array.from([ix,iy])} bg='black' borderWidth='1px'></Box>
 
                   } else {
-                     return <Box as='button' onClick={(e) => clickCell(e)} w={5} h={5} id={Array.from([ix,iy])} bg='white' borderWidth='1px'></Box>
+                     return <Box as='button' onClick={(e) => clickCell(e)} w={4} h={4} id={Array.from([ix,iy])} bg='white' borderWidth='1px'></Box>
                   }})} </HStack>)
             }
          </Box>
-         <Button >start</Button>
-         <Button >stop</Button>
+         <Center>
+            <HStack>
+               <Button onClick={start}>start</Button>
+               {
+                  running && <Button onClick={pause}>pause</Button> 
+               }
+               {
+                  !running && <Button onClick={restart}>restart</Button> 
+               }
+               <Button onClick={reset}>reset</Button>
+            </HStack>
+         </Center>
       </Box>
    );
 }

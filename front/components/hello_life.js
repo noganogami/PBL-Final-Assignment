@@ -3,6 +3,10 @@ export default class Cell {
       this.current_state = initial_state; // array[32][32]
    }
 
+   initialize(initial_state) {
+      this.current_state = initial_state;
+   }
+
 
    invertState(xi, yi) {
       let next_state = new Array(32);

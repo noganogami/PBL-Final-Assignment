@@ -24,7 +24,6 @@ export const Header = () =>
          display="flex"
          justifyContent="center"
          alignItems="center"
-         pos="fixed"
          w="100%"
          zIndex={2}
       >
