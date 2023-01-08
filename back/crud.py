@@ -37,6 +37,10 @@ def create_user(db: Session, user: schemas.UserCreate):
     return db_user
 
 
+def get_items_by_owner_id(db: Session, owner_id, skip: int = 0, limit: int = 100):
+    return db.query(models.Item).filter(models.Item.owner_id == owner_id).offset(skip).limit(limit).all()
+
+
 def get_items(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Item).offset(skip).limit(limit).all()
 

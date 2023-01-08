@@ -47,10 +47,18 @@ export default class Cell {
                }
             }
             // update
-            if (count <= 2 || 5 <= count) {
-               next_state[y][x] = false;
+            if (this.current_state[y][x]) {
+               if (count <= 2 || 5 <= count) {
+                  next_state[y][x] = false;
+               } else {
+                  next_state[y][x] = true;
+               }
             } else {
-               next_state[y][x] = true;
+               if (count == 3) {
+                  next_state[y][x] = true;
+               } else {
+                  next_state[y][x] = false;
+               }
             }
          }
       }

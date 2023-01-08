@@ -95,6 +95,14 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 
+@app.get("/users/items/", response_model=List[schemas.Item])
+def read_items_for_user(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+    username = auth.decode_token(token)["sub"]
+    user = crud.get_user_by_username(db=db, username=username)
+    items = crud.get_items_by_owner_id(db, owner_id=user.user_id, skip=skip, limit=limit)
+    return items
+
+
 @app.post("/items/", response_model=schemas.Item)
 def create_item_for_user(item: schemas.ItemCreate, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
     username = auth.decode_token(token)["sub"]
