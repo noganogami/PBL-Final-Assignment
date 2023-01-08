@@ -4,12 +4,6 @@ import {
    Grid,
    Button,
    HStack,
-   Drawer,
-   DrawerBody,
-   DrawerHeader,
-   DrawerOverlay,
-   DrawerContent,
-   useDisclosure,
 } from '@chakra-ui/react'
 import React, { useState } from 'react';
 import { useRouter } from 'next/router'
@@ -38,7 +32,6 @@ export const Header = () =>
       localStorage.removeItem('token');
    }
    const router = useRouter()
-   const { isOpen, onOpen, onClose } = useDisclosure()
    return (
       <Box
          bg="#072"

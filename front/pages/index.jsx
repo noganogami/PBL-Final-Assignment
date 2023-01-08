@@ -56,11 +56,9 @@ export default function Index() {
    return (<Box>
       <Header />
       <Box p={3}>
-         <Center>
-            {
-               router.isReady && (query.init ? <LifeGame initState={query.init}/> : <LifeGame />)
-            }
-         </Center>
+         {
+            router.isReady && (query.init ? <LifeGame initState={query.init}/> : <LifeGame />)
+         }
       </Box>
    </Box>);
 }

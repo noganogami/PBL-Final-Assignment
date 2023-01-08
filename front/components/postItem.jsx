@@ -9,6 +9,7 @@ import {
    RadioGroup,
    Input,
    Button,
+   Center,
 } from '@chakra-ui/react'
 
 
@@ -57,7 +58,7 @@ export default function PostForm(props) {
    }
    return (
       <form onSubmit={handleSubmit(onSubmit)}>
-         <Stack>
+         <Stack w='100%'>
             <FormControl isInvalid={errors.title}>
                <FormLabel htmlFor='title'>title</FormLabel>
                <Input
@@ -74,16 +75,22 @@ export default function PostForm(props) {
 
             <FormControl as='fieldset'>
                <FormLabel as='legend'>Tag</FormLabel>
-               <RadioGroup onChange={setValue} value={value}>
-                  <HStack spacing='24px'>
-                     <Radio value='still_life'>個体物体</Radio>
-                     <Radio value='oscillator'>振動子</Radio>
-                     <Radio value='spaceship'>移動物体</Radio>
-                     <Radio value='infinite_growth'>繫殖型</Radio>
-                     <Radio value='methuselah'>長寿型</Radio>
-                     <Radio value='other'>その他</Radio>
-                  </HStack>
-               </RadioGroup>
+               <Center>
+                  <RadioGroup onChange={setValue} value={value}>
+                     <HStack spacing='24px'>
+                        <Stack>
+                           <Radio value='still_life'>個体物体</Radio>
+                           <Radio value='oscillator'>振動子</Radio>
+                           <Radio value='spaceship'>移動物体</Radio>
+                        </Stack>
+                        <Stack>
+                           <Radio value='infinite_growth'>繫殖型</Radio>
+                           <Radio value='methuselah'>長寿型</Radio>
+                           <Radio value='other'>その他</Radio>
+                        </Stack>
+                     </HStack>
+                  </RadioGroup>
+               </Center>
             </FormControl>
             <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
                投稿
