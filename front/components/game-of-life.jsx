@@ -63,6 +63,10 @@ export default function LifeGame(props) {
       pause();
       initialize(checkPoint);
    };
+   const clear = () => {
+      pause();
+      initialize(init);
+   }
    const set = (pattern) => {
       pause();
       initialize(InitCell(pattern));
@@ -113,6 +117,7 @@ export default function LifeGame(props) {
                         !running && <Button onClick={restart}>restart</Button> 
                      }
                      <Button onClick={reset}>reset</Button>
+                     <Button onClick={clear}>clear</Button>
                   </HStack>
                </Center>
             </GridItem>
@@ -123,6 +128,18 @@ export default function LifeGame(props) {
                   </Radio>
                   <Radio>
                      <Box as='button' onClick={ () => set('pentadecathlon') }>ペンタデカスロン</Box>
+                  </Radio>
+                  <Radio>
+                     <Box as='button' onClick={ () => set('die hard') }>ダイハード</Box>
+                  </Radio>
+                  <Radio>
+                     <Box as='button' onClick={ () => set('acorn') }>どんぐり</Box>
+                     <Radio>
+                        <Box as='button' onClick={ () => set('lightwight_spaceship') }>軽量級宇宙船</Box>
+                     </Radio>
+                     <Radio>
+                        <Box as='button' onClick={ () => set('eater') }>イーター</Box>
+                     </Radio>
                   </Radio>
                </RadioGroup>
             </GridItem>

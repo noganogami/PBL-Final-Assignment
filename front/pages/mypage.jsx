@@ -31,14 +31,14 @@ export default function Mypage() {
    }, []);
 
    const router = useRouter();
-   const arr = [10, 11, 12, 13];
+   const arr = items ? Array.from({length: items.length}, (v, i) => i) : [];
    return(
       <Box>
          <Header />
          <Box p={3}>
             <HStack>
                {
-                  arr.map(n => items && <Box as='button' onClick={() => router.push( '/?init=' + items[n][ 'indices' ] )}><Item title={items[n]['title']} tag={items[n][ 'tag' ]} indices={items[n][ 'indices' ]} /></Box>)
+                  arr.map(n => <Box as='button' onClick={() => router.push( '/?init=' + items[n][ 'indices' ] )}><Item title={items[n]['title']} tag={items[n][ 'tag' ]} indices={items[n][ 'indices' ]} /></Box>)
                }
             </HStack>
          </Box>

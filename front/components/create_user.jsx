@@ -9,10 +9,11 @@ import {
    Button,
 } from '@chakra-ui/react'
 
-export default function LoginForm() {
+export default function CreateForm() {
    const {
       handleSubmit,
       register,
+      watch,
       formState: { errors, isSubmitting },
    } = useForm()
    const router = useRouter()
@@ -20,8 +21,8 @@ export default function LoginForm() {
    function onSubmit(form) {
       return new Promise((resolve) => {
          setTimeout(async () => {
-            if (await requestToken(form)) {
-               router.push('/')
+            if (await createUser(form)) {
+               router.push('/login')
             }
             resolve()
          }, 3000)
@@ -29,24 +30,22 @@ export default function LoginForm() {
    }
 
 
-   async function requestToken(form) {
-      const url = 'http://localhost:8000/token';
+   async function createUser(form) {
+      const url = 'http://localhost:8000/users/';
       const response = await fetch(url, {
          method: 'POST',
          headers: {
             'accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
          },
-         body: 'username=' + encodeURIComponent(form['username']) + 
-         '&password=' + encodeURIComponent(form['password'])
+         body: JSON.stringify( { 'username': form['username'], 'password': form['password'] } )
       })
-      const res_body = await response.json() // if response is ok, then return token
+      const res_body = await response.json() 
 
       if (!response.ok) {
          alert(JSON.stringify(res_body['detail']))
          return false
       } else {
-         localStorage.setItem('token', JSON.stringify(res_body))
          return true
       }
    }
@@ -60,7 +59,7 @@ export default function LoginForm() {
                   id='username'
                   placeholder='username'
                   {...register('username', {
-                     required: 'This is required',
+                     required: '入力してください',
                   })}
                />
                <FormErrorMessage>
@@ -75,16 +74,37 @@ export default function LoginForm() {
                   placeholder='password'
                   type='password'
                   {...register('password', {
-                     required: 'This is required',
-                     minLength: { value: 4, message: 'Minimum length should be 4' },
+                     required: '入力してください',
+                     minLength: { value: 8, message: '8文字以上入力してください' },
                   })}
                />
                <FormErrorMessage>
                   {errors.password && errors.password.message}
                </FormErrorMessage>
             </FormControl>
+
+            <FormControl isInvalid={errors.confirm_pwd}>
+               <FormLabel htmlFor='confirm_pwd'>Confirm Password</FormLabel>
+               <Input
+                  id='confirm_pwd'
+                  placeholder='confirm password'
+                  type='confirm_pwd'
+                  {...register('confirm_pwd', {
+                     required: '入力してください',
+                     validate: (val) => {
+                        if (watch('password') != val) {
+                           return 'パスワードが一致しません';
+                        }
+                     },
+                  })}
+               />
+               <FormErrorMessage>
+                  {errors.confirm_pwd && errors.confirm_pwd.message}
+               </FormErrorMessage>
+            </FormControl>
+
             <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
-               Sign In
+               Sign Up
             </Button>
          </Stack>
       </  form>

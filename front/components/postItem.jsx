@@ -24,7 +24,6 @@ export default function PostForm(props) {
 
 
    async function createItem(form, indices) {
-      alert(value);
       const url = 'http://localhost:8000/items/';
       const token = localStorage.getItem('token')
       let authrization_value = ''
@@ -43,8 +42,11 @@ export default function PostForm(props) {
          },
          body: JSON.stringify({'title': form[ 'title' ], 'tag': value, 'indices': indices})
       })
-      return response.json();  // JSON のレスポンスをネイティブの JavaScript
-      // オブジェクトに解釈
+      if (!response.ok) {
+         response.json().then((data) => alert( JSON.stringify(data["detail"]) ) );
+      } else {
+         return response.json();  // JSON のレスポンスをネイティブの JavaScript
+      }
    }
 
 
@@ -93,7 +95,7 @@ export default function PostForm(props) {
                </Center>
             </FormControl>
             <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
-               投稿
+               保存
             </Button>
          </Stack>
       </form>
