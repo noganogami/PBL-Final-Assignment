@@ -123,23 +123,26 @@ export default function LifeGame(props) {
             </GridItem>
             <GridItem w='100%' h='100%' >
                <RadioGroup>
-                  <Radio>
+                  <Radio p={1}>
                      <Box as='button' onClick={ () => set('R-pentomino') }>R-ペントミノ</Box>
                   </Radio>
-                  <Radio>
+                  <Radio p={1}>
                      <Box as='button' onClick={ () => set('pentadecathlon') }>ペンタデカスロン</Box>
                   </Radio>
-                  <Radio>
+                  <Radio p={1}>
+                     <Box as='button' onClick={ () => set('cross') }>クロス</Box>
+                  </Radio>
+                  <Radio p={1}>
                      <Box as='button' onClick={ () => set('die hard') }>ダイハード</Box>
                   </Radio>
-                  <Radio>
+                  <Radio p={1}>
                      <Box as='button' onClick={ () => set('acorn') }>どんぐり</Box>
-                     <Radio>
-                        <Box as='button' onClick={ () => set('lightwight_spaceship') }>軽量級宇宙船</Box>
-                     </Radio>
-                     <Radio>
-                        <Box as='button' onClick={ () => set('eater') }>イーター</Box>
-                     </Radio>
+                  </Radio>
+                  <Radio p={1}>
+                     <Box as='button' onClick={ () => set('lightwight_spaceship') }>軽量級宇宙船</Box>
+                  </Radio>
+                  <Radio p={1}>
+                     <Box as='button' onClick={ () => set('eater') }>イーター</Box>
                   </Radio>
                </RadioGroup>
             </GridItem>
