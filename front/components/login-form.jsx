@@ -76,7 +76,6 @@ export default function LoginForm() {
                   type='password'
                   {...register('password', {
                      required: 'This is required',
-                     minLength: { value: 4, message: 'Minimum length should be 4' },
                   })}
                />
                <FormErrorMessage>

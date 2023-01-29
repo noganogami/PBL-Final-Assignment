@@ -88,7 +88,7 @@ export default function CreateForm() {
                <Input
                   id='confirm_pwd'
                   placeholder='confirm password'
-                  type='confirm_pwd'
+                  type='password'
                   {...register('confirm_pwd', {
                      required: '入力してください',
                      validate: (val) => {

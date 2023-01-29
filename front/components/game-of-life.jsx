@@ -49,7 +49,7 @@ export default function LifeGame(props) {
    }
 
 
-   const use1Second = interval(2e2);
+   const useSecond = interval(2e2);
 
    const [running, setRunning] = useState(false);
    const tick = useCallback(
@@ -72,7 +72,7 @@ export default function LifeGame(props) {
       initialize(InitCell(pattern));
    }
 
-   use1Second(tick);
+   useSecond(tick);
 
 
    function toBinary(cells) {

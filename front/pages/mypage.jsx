@@ -1,4 +1,4 @@
-import { HStack, Box } from '@chakra-ui/react';
+import { Wrap, WrapItem, Box } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import {Item} from '../components/item';
@@ -36,11 +36,11 @@ export default function Mypage() {
       <Box>
          <Header />
          <Box p={3}>
-            <HStack>
+            <Wrap>
                {
-                  arr.map(n => <Box as='button' onClick={() => router.push( '/?init=' + items[n][ 'indices' ] )}><Item title={items[n]['title']} tag={items[n][ 'tag' ]} indices={items[n][ 'indices' ]} /></Box>)
+                  arr.map(n => <WrapItem as='button' onClick={() => router.push( '/?init=' + items[n][ 'indices' ] )}><Item title={items[n]['title']} tag={items[n][ 'tag' ]} indices={items[n][ 'indices' ]} /></WrapItem>)
                }
-            </HStack>
+            </Wrap>
          </Box>
       </Box>
    )
