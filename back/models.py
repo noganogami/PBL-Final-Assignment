@@ -14,7 +14,6 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.now())
 
     items = relationship("Item", back_populates="owner")
-    favorites = relationship("Favo", back_populates="user")
 
 
 class Tag(str, enum.Enum):
@@ -37,16 +36,3 @@ class Item(Base):
     created_at = Column(DateTime, default=datetime.now(), index=True)
 
     owner = relationship("User", back_populates="items")
-    favorites = relationship("Favo", back_populates="item")
-
-
-class Favo(Base):
-    __tablename__ = "favorites"
-
-    favo_id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.user_id"))
-    item_id = Column(Integer, ForeignKey("items.item_id"))
-    created_at = Column(DateTime, default=datetime.now(), index=True)
-
-    user = relationship("User", back_populates="favorites")
-    item = relationship("Item", back_populates="favorites")

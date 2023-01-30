@@ -51,11 +51,3 @@ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
     db.commit()
     db.refresh(db_item)
     return db_item
-
-
-def create_favo(db: Session, favo: schemas.FavoCreate):
-    db_favo = models.Favo(**favo.dict())
-    db.add(db_favo)
-    db.commit()
-    db.refresh(db_favo)
-    return db_favo

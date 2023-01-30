@@ -8,22 +8,6 @@ class Token(BaseModel):
     token_type: str
 
 
-class FavoBase(BaseModel):
-    user_id: int
-    item_id: int
-
-
-class FavoCreate(FavoBase):
-    pass
-
-
-class Favo(FavoBase):
-    favo_id: int
-
-    class Config:
-        orm_mode = True
-
-
 class ItemBase(BaseModel):
     title: str
     tag: Union[Tag, None] = None
@@ -37,7 +21,6 @@ class ItemCreate(ItemBase):
 class Item(ItemBase):
     item_id: int
     owner_id: int
-    favorites: List[Favo] = []
 
     class Config:
         orm_mode = True
@@ -54,7 +37,6 @@ class UserCreate(UserBase):
 class User(UserBase):
     user_id: int
     items: List[Item] = []
-    favorites: List[Favo] = []
 
     class Config:
         orm_mode = True
