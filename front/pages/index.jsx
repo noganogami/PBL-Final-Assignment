@@ -1,7 +1,5 @@
-import {Center, Text, HStack, Box} from '@chakra-ui/layout';
-import React, { useState } from 'react';
-import {SimpleGrid, Button, ButtonGroup} from '@chakra-ui/react'
-import Link from 'next/link'
+import {Box} from '@chakra-ui/layout';
+import { useState } from 'react';
 import LifeGame from '../components/game-of-life'
 import { Header } from '../components/header'
 import { useRouter } from 'next/router'

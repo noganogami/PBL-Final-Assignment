@@ -1,4 +1,6 @@
 import { Center, Badge, Box, HStack, Stack } from '@chakra-ui/react';
+
+
 export function Item(props) {
    const s = props.indices.split('');
    let sArr = [];

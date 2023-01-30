@@ -1,7 +1,6 @@
 import {Box} from '@chakra-ui/layout';
 import CreateForm from '../components/create_user'
 import { Header } from '../components/header'
-import {Stack, HStack} from '@chakra-ui/layout';
 import {Text, Grid, GridItem, Center} from '@chakra-ui/react';
 
 const SignUp = () =>

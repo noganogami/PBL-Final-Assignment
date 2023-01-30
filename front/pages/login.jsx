@@ -2,7 +2,7 @@ import {Box} from '@chakra-ui/layout';
 import Link from 'next/link'
 import LoginForm from '../components/login-form'
 import { Header } from '../components/header'
-import {Stack, HStack} from '@chakra-ui/layout';
+import {HStack} from '@chakra-ui/layout';
 import {Text, Grid, GridItem, Center} from '@chakra-ui/react';
 
 const Login = () =>

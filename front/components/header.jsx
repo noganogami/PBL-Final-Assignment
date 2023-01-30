@@ -1,11 +1,9 @@
 import {
    Box,
    Text,
-   Grid,
-   Button,
    HStack,
 } from '@chakra-ui/react'
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 

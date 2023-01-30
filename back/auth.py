@@ -9,7 +9,7 @@ import crud
 # openssl rand -hex 32
 SECRET_KEY = "764e087ffcb3a7310dcb7f52cbad1490c0494551c00fd9a24c88c48231f87eb3"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 100
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 def authenticate_user(db: Session, username: str, password: str):

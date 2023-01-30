@@ -1,5 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import {Radio, RadioGroup, Center, HStack, VStack, Grid, GridItem, SimpleGrid, Box, Text, Button, ButtonGroup} from '@chakra-ui/react'
+import { useCallback, useState, useEffect } from 'react';
+import {Radio, RadioGroup, Center, HStack,  Grid, GridItem,  Box,  Button, } from '@chakra-ui/react'
 import Cell from './hello_life';
 import { interval } from './interval';
 import PostForm from './postItem';
