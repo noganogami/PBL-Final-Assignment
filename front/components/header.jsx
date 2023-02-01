@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 
-function hoge() {
+function hasToken() {
    if (typeof window !== 'undefined') {
       // Perform localStorage action
       const item = localStorage.getItem('token')
@@ -24,7 +24,7 @@ function hoge() {
 
 export const Header = () => 
 {
-   const [isLoggedIn,setState] = useState(hoge());
+   const [isLoggedIn,setState] = useState(hasToken());
    function signOut() {
       setState(false);
       localStorage.removeItem('token');
